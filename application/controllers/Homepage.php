@@ -7,14 +7,22 @@ class Homepage extends CI_Controller
 	public function __construct()
 	{
 		parent::__construct();
+		permission();
 		$this->load->model("items_model");
 	}
 
 	public function index()
 	{
-		$data['allItems'] = $this->items_model->index();
+		$data['items'] = $this->items_model->index();
+		$data['title'] = 'BuyaShoes';
 
-		$this->load->view('homepage', $data);
+		$this->load->view('pages/homepage', $data);
+
+	}
+
+	public function teste()
+	{
+		
 
 	}
 }
