@@ -16,13 +16,18 @@ class Homepage extends CI_Controller
 		$data['items'] = $this->items_model->index();
 		$data['title'] = 'BuyaShoes';
 
+
+		$this->load->view('templates/header', $data);
 		$this->load->view('pages/homepage', $data);
+		$this->load->view('templates/footer', $data);
 
 	}
 
-	public function teste()
+	public function edit($id)
 	{
-		
+		$this->load->view('templates/header');
+		$this->load->view('templates/form-edit-items');
+		$this->load->view('templates/footer');
 
 	}
 }
