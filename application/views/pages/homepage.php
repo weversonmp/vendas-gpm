@@ -10,7 +10,7 @@
 				<div class="col-sm-4 col-xl-3 fade-in mb-3">
 					<div class="card" id="card-shape">
 						<div class="card-body">
-							<img src="<?= base_url() ?>img/cbddd67b-444b-4a7c-b458-20643ab89b1b.webp" alt="Imagem do Tênis" class="card-img">
+							<img src="<?= base_url() ?>img/shoes.png" alt="Imagem do Tênis" class="card-img">
 							<h3 id="h3a" class="card-title text-break text-truncate "><?= $item['item_name'] ?></h3>
 							<p class="card-text"><?= $item['brand'] ?></p>
 							<p class="card-text"><?= $item['model'] ?></p>

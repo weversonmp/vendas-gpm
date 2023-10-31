@@ -86,7 +86,7 @@ class Homepage extends CI_Controller
 	public function delete($id)
 	{
 		permission();
-		
+
 		$this->items_model->delete($id);
 		redirect('homepage');
 	}

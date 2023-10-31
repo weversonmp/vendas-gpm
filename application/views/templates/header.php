@@ -18,9 +18,9 @@
 
 <body class="bg-secondary">
 	<?php
-	print_r('<pre>');
-	print_r($loggedUser);
-	die();
+	// print_r('<pre>');
+	// print_r($loggedUser);
+	// die();
 	?>
 	<header>
 		<!-- Nav -->
@@ -57,12 +57,33 @@
 					</ul>
 					<form action="<?= base_url() ?>homepage/search" method="post" class="d-flex" role="search">
 						<input class="form-control me-2" name="search" type="search" placeholder="Pesquisar" aria-label="Search">
-						<button class="btn btn-outline-success" type="submit">Search</button>
+						<button class="btn btn-outline-success me-2" type="submit">Search</button>
+
+						<?php if (!$loggedUser) : ?>
+							<a href="<?= base_url() ?>login" class="btn btn-primary me-2" type="button">Login</a>
+							<button class="btn btn-warning" type="button">Carrinho</button>
+
+						<?php elseif ($loggedUser['access_type'] == 'admin') : ?>
+							<div class="dropdown me-2">
+								<button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<?= $loggedUser['first_name'] ?>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="#">Perfil</a></li>
+									<li><a class="dropdown-item" href="#">Items Desativados</a></li>
+									<li><a class="dropdown-item" href="<?= base_url() ?>login/logout">Log out</a></li>
+								</ul>
+							</div>
+							<button class="btn btn-warning text-nowrap" type="button">
+								<i class="fa-solid fa-plus"></i> Item
+							</button>
+
+						<?php elseif ($loggedUser['access_type'] == 'custumer') : ?>
+							<button class="btn btn-primary me-2" type="button">cliente</button>
+							<button class="btn btn-warning" type="button">Carrinho</button>
+						<?php endif ?>
 					</form>
-					<?php if (!isset($_SESSION['logged_user']['access_type']) == 'admin') : ?>
-						<button class="btn btn-primary" type="button">Login</button>
-						<button class="btn btn-warning" type="button">Carrinho</button>
-					<?php endif ?>
+
 				</div>
 			</div>
 		</nav>

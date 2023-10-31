@@ -17,60 +17,62 @@
 </head>
 
 
-	<style>
-		body {
-			background-image: url('<?= base_url() ?>img/wpp.jpg');
-			background-repeat: no-repeat;
-			background-size: cover;
-		}
-		
-		form {
-			background-color: #23272e;
-			border-radius: 5px;
-			color: white;
-			border: 1px solid #595f67;
-		}
+<style>
+	body {
+		background-image: url('<?= base_url() ?>img/wpp.jpg');
+		background-repeat: no-repeat;
+		background-size: cover;
+	}
 
-		#inputPassword, #username {
-			border-radius: 4px;
-		}
-		
-		.bd-placeholder-img {
-			font-size: 1.125rem;
-			text-anchor: middle;
-			-webkit-user-select: none;
-			-moz-user-select: none;
-			-ms-user-select: none;
-			user-select: none;
-		}
+	form {
+		background-color: #23272e;
+		border-radius: 5px;
+		color: white;
+		border: 1px solid #595f67;
+	}
 
-		@media (min-width: 768px) {
-			.bd-placeholder-img-lg {
-				font-size: 3.5rem;
-			}
+	#inputPassword,
+	#username {
+		border-radius: 4px;
+	}
+
+	.bd-placeholder-img {
+		font-size: 1.125rem;
+		text-anchor: middle;
+		-webkit-user-select: none;
+		-moz-user-select: none;
+		-ms-user-select: none;
+		user-select: none;
+	}
+
+	@media (min-width: 768px) {
+		.bd-placeholder-img-lg {
+			font-size: 3.5rem;
 		}
-	</style>
-	<!-- Custom styles for this template -->
-	<link href="https://getbootstrap.com/docs/5.1/examples/sign-in/signin.css" rel="stylesheet">
+	}
+</style>
+<!-- Custom styles for this template -->
+<link href="https://getbootstrap.com/docs/5.1/examples/sign-in/signin.css" rel="stylesheet">
 </head>
 
 <body class="text-center">
 	<form class="p-5 form-signin" method="post" action="<?= base_url() ?>login/userlogin">
-		<img class="mb-4" src="https://getbootstrap.com/docs/4.4/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-		<h1 class="h3 mb-3 font-weight-normal">Faça Login</h1>
-		<label for="username" class="sr-only">Email address</label>
+		<img style='border-radius: 50%;' class="mb-4 w-50" src="<?= base_url() ?>img/shoesbrand/3.jpeg">
+		<h1 class="h3 mb-3 font-weight-normal">BuyaShoes | Login</h1>
 		<input type="text" name="username" id="username" class="form-control mb-2" placeholder="Nome do usuário" required autofocus>
-		<label for="inputPassword" class="sr-only">Password</label>
 		<input type="password" name="password" id="inputPassword" class="form-control" placeholder="Senha" required>
 		<div class="checkbox mb-3">
 			<label>
 				<input type="checkbox" value="remember-me"> Remember me
 			</label>
 		</div>
+		<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Log in</button>
 		<p>
 			<a href="<?= base_url() ?>/signup">Não tem uma conta?</a>
 		</p>
-		<button class="btn btn-lg btn-primary btn-block" type="submit">Log in</button>
+		<p>
+			<a href="<?= base_url() ?>">Veja nosso catálogo!</a>
+		</p>
 		<p class="mt-5 mb-3 text-muted">&copy; 2023</p>
 	</form>
 </body>
