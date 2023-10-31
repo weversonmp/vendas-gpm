@@ -19,8 +19,8 @@ class Homepage extends CI_Controller
 		$data['loggedUser'] =  loggedUser();
 		$data['items'] = $this->items_model->index();
 		$data['title'] = 'BuyaShoes';
-		
-		
+
+
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/homepage', $data);
 		$this->load->view('templates/footer', $data);
@@ -28,6 +28,7 @@ class Homepage extends CI_Controller
 
 	public function search()
 	{
+		$data['loggedUser'] =  loggedUser();
 		$input = $_POST['search'];
 		$data['items'] = $this->items_model->search($input);
 		$data['title'] = 'BuyaShoes';
@@ -42,6 +43,8 @@ class Homepage extends CI_Controller
 	{
 		permission();
 
+		$data['loggedUser'] =  loggedUser();
+
 		$data['item'] = $this->items_model->editItem($id);
 		$data['title'] = $data['item']['item_name'] . ' Editing...';
 
@@ -53,6 +56,8 @@ class Homepage extends CI_Controller
 	public function update()
 	{
 		permission();
+
+		$data['loggedUser'] =  loggedUser();
 
 		$item['id'] = $_POST['item_id'];
 		$item['item_name'] = $_POST['item_name'];

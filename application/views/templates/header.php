@@ -14,9 +14,30 @@
 
 	<!-- Local CSS -->
 	<link rel="stylesheet" href="<?= base_url() ?>css/style.css">
+
+	<!-- <style>
+		#mirrorEffect {
+			content: ' ';
+			display: block;
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			opacity: 0.6;
+			background-image: url('<?= base_url() ?>img/wpp.jpg');
+			background-repeat: no-repeat;
+			background-position: 50% 0;
+			background-size: cover;
+			border-radius: 10px;
+			border: 1px solid rgba(255, 255, 255, 0.18);
+
+		}
+	</style> -->
 </head>
 
-<body class="bg-secondary">
+<body class="bg-dark">
+	<div id="mirrorEffect"></div>
 	<?php
 	// print_r('<pre>');
 	// print_r($loggedUser);
@@ -24,7 +45,7 @@
 	?>
 	<header>
 		<!-- Nav -->
-		<nav class="navbar navbar-expand bg-dark fixed-top ">
+		<nav class="navbar navbar-expand bg-dark fixed-top shadow">
 			<div class="container-fluid">
 				<a class="navbar-brand" href="<?= base_url() ?>">BuyaShoes</a>
 				<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll" aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
