@@ -3,13 +3,10 @@
 function permission()
 {
 	$ci = get_instance();
-	$loggedUser = $ci->session->userdata['logged_user'];
-	// print_r('<pre>');
-	// 	print_r($loggedUser['access_type']);
-	// 	die();
+	$loggedAdmin = $ci->session->userdata['logged_user'];
 
-	if ($loggedUser['access_type'] == 'admin') {
-		return $loggedUser;
+	if ($loggedAdmin['access_type'] == 'admin') {
+		return $loggedAdmin;
 	}
 	
 	$ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
@@ -23,7 +20,6 @@ function permission()
 function loggedUser()
 {
 	$ci = get_instance();
-	$loggedUser = isset($ci->session->userdata['logged_user']);
 
 	if (isset($ci->session->userdata['logged_user'])) {
 		$loggedUser = $ci->session->userdata['logged_user'];

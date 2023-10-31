@@ -20,6 +20,7 @@ class Homepage extends CI_Controller
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/homepage', $data);
+		$this->load->view('templates/footer-script', $data);
 		$this->load->view('templates/footer', $data);
 	}
 
