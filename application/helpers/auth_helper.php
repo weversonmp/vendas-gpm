@@ -4,13 +4,20 @@ function permission()
 {
 	$ci = get_instance();
 	$loggedUser = $ci->session->userdata['logged_user'];
+	// print_r('<pre>');
+	// 	print_r($loggedUser['access_type']);
+	// 	die();
 
-	if (!$loggedUser) {
-		$ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
-		redirect("login");
+	if ($loggedUser['access_type'] == 'admin') {
+		return $loggedUser;
 	}
+	
+	$ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
+	$ci->session->keep_flashdata("danger");
 
-	return $loggedUser;
+	redirect(base_url());
+
+
 }
 
 function loggedUser()
@@ -23,11 +30,6 @@ function loggedUser()
 	} else {
 		$loggedUser = '';
 	}
-
-	// if ($loggedUser['access_type'] == 'admin') {
-	// 	// $ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
-	// 	// redirect("login");
-	// }
 
 	return $loggedUser;
 }

@@ -11,6 +11,192 @@
 	<!-- Font Awesome -->
 	<script src="https://kit.fontawesome.com/2a33fe9a00.js" crossorigin="anonymous"></script>
 
+	<style>
+		@import url('https://fonts.googleapis.com/css?family=Montserrat:400,700&display=swap');
+
+		* {
+			margin: 0;
+			padding: 0;
+			box-sizing: border-box;
+			list-style: none;
+			font-family: 'Montserrat', sans-serif
+		}
+
+		body {
+			background-color: #b064f7;
+			line-height: 1rem;
+			font-size: 14px;
+			padding: 10px
+		}
+
+		.container {
+			border-top-left-radius: 25px;
+			border-top-right-radius: 25px;
+			border-bottom-left-radius: 25px;
+			border-bottom-right-radius: 25px;
+			background-color: #eee;
+			max-width: 60%;
+		}
+
+		.navbar-brand {
+			text-transform: uppercase;
+			font-size: 14px;
+			font-weight: 800
+		}
+
+		small {
+			font-size: 12px
+		}
+
+		.icon {
+			background-color: #eee;
+			width: 40px;
+			height: 40px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			border-radius: 50%
+		}
+
+		.pic {
+			height: 70px;
+			width: 100px;
+			border-radius: 5px
+		}
+
+		td {
+			vertical-align: middle
+		}
+
+		.red {
+			color: #fd1c1c;
+			font-weight: 600
+		}
+
+		.b-bottom {
+			border-bottom: 2px dotted black;
+			padding-bottom: 20px
+		}
+
+		p {
+			margin: 0px
+		}
+
+		table input {
+			width: 40px;
+			border: 1px solid #eee
+		}
+
+		input:focus {
+			border: 1px solid #eee;
+			outline: none
+		}
+
+		.round {
+			background-color: #eee;
+			height: 40px;
+			width: 40px;
+			border-radius: 50%;
+			display: flex;
+			align-items: center;
+			justify-content: center
+		}
+
+		.payment-summary .unregistered {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			background-color: #eee;
+			text-transform: uppercase;
+			font-size: 14px
+		}
+
+		.payment-summary input {
+			width: 100%;
+			margin-right: 20px
+		}
+
+		.payment-summary .sale {
+			width: 100%;
+			background-color: #e9b3b3;
+			text-transform: uppercase;
+			font-size: 12px;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			padding: 5PX 0
+		}
+
+		.red {
+			color: #fd1c1c
+		}
+
+		.del {
+			width: 35px;
+			height: 35px;
+			object-fit: cover
+		}
+
+		.delivery .card {
+			padding: 10px 5px
+		}
+
+		.option {
+			position: relative;
+			top: 50%;
+			display: block;
+			cursor: pointer;
+			color: #888
+		}
+
+		.option input {
+			display: none
+		}
+
+		.checkmark {
+			position: absolute;
+			top: 40%;
+			left: -25px;
+			height: 20px;
+			width: 20px;
+			background-color: #fff;
+			border: 1px solid #ccc;
+			border-radius: 50%
+		}
+
+		.option input:checked~.checkmark:after {
+			display: block
+		}
+
+		.option .checkmark:after {
+			content: "\2713";
+			width: 10px;
+			height: 10px;
+			display: block;
+			position: absolute;
+			top: 30%;
+			left: 50%;
+			transform: translate(-50%, -50%) scale(0);
+			transition: 200ms ease-in-out 0s
+		}
+
+		.option:hover input[type="radio"]~.checkmark {
+			background-color: #f4f4f4
+		}
+
+		.option input[type="radio"]:checked~.checkmark {
+			background: #ac1f32;
+			color: #fff;
+			transition: 300ms ease-in-out 0s
+		}
+
+		.option input[type="radio"]:checked~.checkmark:after {
+			transform: translate(-50%, -50%) scale(1);
+			color: #fff
+		}
+	</style>
+
 
 	<!-- Local CSS -->
 	<link rel="stylesheet" href="<?= base_url() ?>css/style.css">
@@ -56,25 +242,6 @@
 						<li class="nav-item">
 							<a class="nav-link active" aria-current="page" href="<?= base_url() ?>">Home</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="#">Link</a>
-						</li>
-						<li class="nav-item dropdown">
-							<a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-								Link
-							</a>
-							<ul class="dropdown-menu">
-								<li><a class="dropdown-item" href="#">Action</a></li>
-								<li><a class="dropdown-item" href="#">Another action</a></li>
-								<li>
-									<hr class="dropdown-divider">
-								</li>
-								<li><a class="dropdown-item" href="#">Something else here</a></li>
-							</ul>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link disabled" aria-disabled="true">Link</a>
-						</li>
 					</ul>
 					<form action="<?= base_url() ?>homepage/search" method="post" class="d-flex" role="search">
 						<input class="form-control me-2" name="search" type="search" placeholder="Pesquisar" aria-label="Search">
@@ -91,6 +258,7 @@
 								</button>
 								<ul class="dropdown-menu">
 									<li><a class="dropdown-item" href="#">Perfil</a></li>
+									<li><a class="dropdown-item" href="#">Vendas Realizadas</a></li>
 									<li><a class="dropdown-item" href="#">Items Desativados</a></li>
 									<li><a class="dropdown-item" href="<?= base_url() ?>login/logout">Log out</a></li>
 								</ul>
@@ -100,7 +268,16 @@
 							</button>
 
 						<?php elseif ($loggedUser['access_type'] == 'custumer') : ?>
-							<button class="btn btn-primary me-2" type="button">cliente</button>
+							<div class="dropdown me-2">
+								<button class="btn btn-outline-primary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+									<?= $loggedUser['first_name'] ?>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a class="dropdown-item" href="#">Perfil</a></li>
+									<li><a class="dropdown-item" href="#">Compras</a></li>
+									<li><a class="dropdown-item" href="<?= base_url() ?>login/logout">Log out</a></li>
+								</ul>
+							</div>
 							<button class="btn btn-warning" type="button">Carrinho</button>
 						<?php endif ?>
 					</form>

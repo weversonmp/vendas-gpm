@@ -12,10 +12,7 @@ class Homepage extends CI_Controller
 
 	public function index()
 	{
-		// print_r('<pre>');
-		// print_r($_SESSION);
-		// print_r(permission());
-		// die();
+
 		$data['loggedUser'] =  loggedUser();
 		$data['items'] = $this->items_model->index();
 		$data['title'] = 'BuyaShoes';
@@ -41,8 +38,9 @@ class Homepage extends CI_Controller
 
 	public function edit($id)
 	{
+		
 		permission();
-
+		
 		$data['loggedUser'] =  loggedUser();
 
 		$data['item'] = $this->items_model->editItem($id);

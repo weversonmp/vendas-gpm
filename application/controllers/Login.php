@@ -40,6 +40,11 @@ class Login extends CI_Controller
 		}
 	}
 
+	public function editLogin()
+	{
+		$this->load->model('login_model');
+	}
+
 	public function logout()
 	{
 
