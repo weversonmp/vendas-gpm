@@ -17,14 +17,13 @@ class Cart extends CI_Controller
 	public function payment($id)
 	{
 
-		$isLogged = isset($this->session->userdata['logged_user']);
+		adminPermission();
 
-		if (!$isLogged) {
-			permission();
-		}
+		// print_r('<pre>');
+		// print_r($_SESSION);
+		// die();
 
-		
-		$data['loggedUser'] = loggedUser();
+
 		$data['itemID'] = $id;
 		$data['itemToBuy'] = $this->items_model->editItem($id);
 		$data['title'] = 'Item Delete...';

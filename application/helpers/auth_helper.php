@@ -1,31 +1,52 @@
 <?php
 
-function permission()
+function adminPermission()
 {
 	$ci = get_instance();
-	$loggedAdmin = $ci->session->userdata['logged_user'];
 
-	if ($loggedAdmin['access_type'] == 'admin') {
-		return $loggedAdmin;
+	$isLogged = isset($ci->session->userdata['logged_user']);
+
+	if ($isLogged) {
+		$whoIsLogged = $ci->session->userdata['logged_user']['access_type'];
+
+		switch ($whoIsLogged) {
+			case 'admin':
+				return 'admin';
+				break;
+
+			default:
+				$ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
+				$ci->session->keep_flashdata("danger");
+				redirect(base_url().'/login');
+				break;
+		}
 	}
-	
+
 	$ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
 	$ci->session->keep_flashdata("danger");
-
-	redirect(base_url());
-
-
+	redirect(base_url().'/login');
 }
 
-function loggedUser()
+function custumerPermission()
 {
 	$ci = get_instance();
+	$isLogged = isset($ci->session->userdata['logged_user']);
 
-	if (isset($ci->session->userdata['logged_user'])) {
-		$loggedUser = $ci->session->userdata['logged_user'];
-	} else {
-		$loggedUser = '';
+	if ($isLogged) {
+		$whoIsLogged = $ci->session->userdata['logged_user']['access_type'];
+
+		switch ($whoIsLogged) {
+			case 'custumer':
+				return 'custumer';
+				break;
+
+			default:
+				$ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
+				$ci->session->keep_flashdata("danger");
+
+				redirect(base_url());
+
+				break;
+		}
 	}
-
-	return $loggedUser;
 }

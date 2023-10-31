@@ -12,8 +12,13 @@ class Homepage extends CI_Controller
 
 	public function index()
 	{
+		$data['whoIsLogged'] = '';
+		$isLogged = isset($this->session->userdata['logged_user']);
 
-		$data['loggedUser'] =  loggedUser();
+		if ($isLogged) {
+			$data['whoIsLogged'] = $this->session->userdata['logged_user'];
+		}
+
 		$data['items'] = $this->items_model->index();
 		$data['title'] = 'BuyaShoes';
 
@@ -26,7 +31,13 @@ class Homepage extends CI_Controller
 
 	public function search()
 	{
-		$data['loggedUser'] =  loggedUser();
+		$data['whoIsLogged'] = '';
+		$isLogged = isset($this->session->userdata['logged_user']);
+
+		if ($isLogged) {
+			$data['whoIsLogged'] = $this->session->userdata['logged_user'];
+		}
+
 		$input = $_POST['search'];
 		$data['items'] = $this->items_model->search($input);
 		$data['title'] = 'BuyaShoes';
@@ -34,29 +45,29 @@ class Homepage extends CI_Controller
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/homepage', $data);
+		$this->load->view('templates/footer-script', $data);
 		$this->load->view('templates/footer', $data);
 	}
 
 	public function edit($id)
 	{
-		
-		permission();
-		
-		$data['loggedUser'] =  loggedUser();
+
+		adminPermission();
+		$data['whoIsLogged'] = $this->session->userdata['logged_user'];
 
 		$data['item'] = $this->items_model->editItem($id);
 		$data['title'] = $data['item']['item_name'] . ' Editing...';
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('templates/form-edit-items', $data);
+		$this->load->view('templates/footer-script', $data);
 		$this->load->view('templates/footer', $data);
 	}
 
 	public function update()
 	{
-		permission();
+		adminPermission();
 
-		$data['loggedUser'] =  loggedUser();
 
 		$item['id'] = $_POST['item_id'];
 		$item['item_name'] = $_POST['item_name'];
@@ -75,7 +86,7 @@ class Homepage extends CI_Controller
 
 	public function deleteconfirm($id)
 	{
-		permission();
+		adminPermission();
 
 		$data['itemID'] = $id;
 		$data['itemToDelete'] = $this->items_model->editItem($id);
@@ -89,7 +100,7 @@ class Homepage extends CI_Controller
 
 	public function delete($id)
 	{
-		permission();
+		adminPermission();
 
 		$this->items_model->delete($id);
 		redirect('homepage');
