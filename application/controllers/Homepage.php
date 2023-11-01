@@ -33,6 +33,7 @@ class Homepage extends CI_Controller
 	{
 		$data['whoIsLogged'] = '';
 		$isLogged = isset($this->session->userdata['logged_user']);
+		
 
 		if ($isLogged) {
 			$data['whoIsLogged'] = $this->session->userdata['logged_user'];

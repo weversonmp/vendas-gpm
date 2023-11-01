@@ -193,9 +193,9 @@
                   <li><a class="dropdown-item" href="<?= base_url() ?>login/logout">Log out</a></li>
                 </ul>
               </div>
-              <button class="btn btn-warning text-nowrap" type="button">
-                <i class="fa-solid fa-plus"></i> Item
-              </button>
+              <a href="<?= base_url() ?>newitem/itemForm/" class="btn btn-warning text-nowrap">
+                  <i class="fa-solid fa-plus"></i> Item
+              </a>
 
             <?php elseif ($whoIsLogged['access_type'] == 'custumer') : ?>
               <div class="dropdown me-2">

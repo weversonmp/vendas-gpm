@@ -21,6 +21,12 @@ class Items_model extends CI_Model
 
 	}
 
+	public function newItem($item)
+	{
+
+		$this->db->insert('tb_items', $item);
+	}
+
 	public function editItem($id)
 	{
 
