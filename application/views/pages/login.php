@@ -68,7 +68,7 @@
 		</div>
 		<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Log in</button>
 		<p>
-			<a href="<?= base_url() ?>/signup">Não tem uma conta?</a>
+			<a class="icon-link icon-link-hover" href="<?= base_url() ?>login/signup">Não tem uma conta?</a>
 		</p>
 		<p>
 			<a href="<?= base_url() ?>">Veja nosso catálogo!</a>

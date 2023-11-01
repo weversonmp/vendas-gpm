@@ -187,7 +187,7 @@
                   <?= $whoIsLogged['first_name'] ?>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Perfil</a></li>
+                  <li><a class="dropdown-item" href="<?= base_url() ?>login/usercreateadmin">Perfil</a></li>
                   <li><a class="dropdown-item" href="#">Vendas Realizadas</a></li>
                   <li><a class="dropdown-item" href="#">Items Desativados</a></li>
                   <li><a class="dropdown-item" href="<?= base_url() ?>login/logout">Log out</a></li>

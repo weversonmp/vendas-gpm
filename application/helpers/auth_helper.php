@@ -17,19 +17,20 @@ function adminPermission()
 			default:
 				$ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
 				$ci->session->keep_flashdata("danger");
-				redirect(base_url().'/login');
+				redirect(base_url() . '/login');
 				break;
 		}
 	}
 
 	$ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
 	$ci->session->keep_flashdata("danger");
-	redirect(base_url().'/login');
+	redirect(base_url() . '/login');
 }
 
 function custumerPermission()
 {
 	$ci = get_instance();
+
 	$isLogged = isset($ci->session->userdata['logged_user']);
 
 	if ($isLogged) {
@@ -43,10 +44,13 @@ function custumerPermission()
 			default:
 				$ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
 				$ci->session->keep_flashdata("danger");
-
-				redirect(base_url());
-
+				redirect(base_url() . '/login');
 				break;
 		}
 	}
+
+	$ci->session->set_flashdata("danger", "Você precisa estar logado para acessar esta página");
+	$ci->session->keep_flashdata("danger");
+	redirect(base_url() . '/login');
+
 }

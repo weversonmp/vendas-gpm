@@ -1,5 +1,5 @@
 <div class="container p-0">
-	<form action="<?= base_url() ?>cart/payment_processed" method="POST">
+	<form action="<?= base_url() ?>cart/payment_processed/<?= $itemToBuy['id'] ?>" method="POST">
 		<div class="row px-md-4 px-2 pt-4">
 			<div class="col-lg-8">
 				<p class="pb-2 fw-bold">Order</p>
@@ -28,11 +28,11 @@
 										</td>
 										<td>
 											<div class="d-flex">
-												<p class="pe-3"><span class="red">R$ <?= $itemToBuy['price'] ?></span></p>
+												<input name="total_price" class="pe-3 d-none" value="<?= $itemToBuy['price'] ?>"><span>R$ <?= $itemToBuy['price'] ?></span>
 											</div>
 										</td>
 										<td>
-											<div class="d-flex align-items-center"> <span class="pe-3 text-muted">Quantity</span> <span class="pe-3"> <input class="ps-2" type="number" value="1" min="1" max="<?= $itemToBuy['stock'] ?>"></span>
+											<div class="d-flex align-items-center"> <span class="pe-3 text-muted">Quantidade</span> <span class="pe-3"> <input name="qtt" id="qtt" value="1" class="ps-2" type="number" placeholder="1" min="1" max="<?= $itemToBuy['stock'] ?>"></span>
 												<div class="round"> <span class=""> <?= $itemToBuy['stock'] ?> </span> </div>
 											</div>
 										</td>
@@ -48,17 +48,37 @@
 				<div class="card px-md-3 px-2 pt-4">
 					<div class="unregistered mb-4"> <span class="py-1">Usuário: <?php print_r($_SESSION['logged_user']['username']) ?></span> </div>
 					<div class="d-flex justify-content-between pb-3 text-nowrap"> <small class="text-muted">Nome:&nbsp;</small>
-						<small><input name="card_name" id="" class="" type="text" placeholder=" Nome no cartão"></small>
+						<small><input name="card_name" id="" class="" type="text" placeholder=" Nome no cartão" required></small>
 					</div>
-					<div class="d-flex justify-content-between pb-3 text-nowrap"> <small class="text-muted">Nú. Cartão:&nbsp;</small>
-						<small><input name="card_number" id="" class="" type="number" placeholder=" Apenas Números"></small>
+					<div class="d-flex justify-content-between pb-3 text-nowrap"> <small class="text-muted">Nº Cartão:&nbsp;</small>
+						<small><input name="card_number" id="" class="" type="number" placeholder=" Apenas Números" required></small>
 					</div>
 					<div class="d-flex justify-content-between pb-3 text-nowrap"> <small class="text-muted">CCV:&nbsp;</small>
-						<small><input name="card_ccv" id="" class="w-25" type="number" placeholder="xxx"></small>
+						<small><input name="card_ccv" id="" class="w-25" type="number" placeholder="xxx" required></small>
 					</div>
 					<div class="d-flex justify-content-between pb-3 text-nowrap"> <small class="text-muted">Validade:&nbsp;</small>
-						<small><input name="card_date" id="" class="" type="date"></small>
+						<small><input name="card_date" id="" class="" type="date" required></small>
 					</div>
+
+
+
+
+
+					<div class="order-infos-div d-none">
+						<input name="user_id" id="" class="" type="text" value="<?= $_SESSION['logged_user']['id'] ?>">
+					</div>
+
+
+					<div class="item-infos-div d-none">
+						<input name="" id="" class="" type="text" value="">
+						<input name="" id="" class="" type="text" value="">
+						<input name="" id="" class="" type="text" value="">
+					</div>
+
+
+
+
+
 					<div class="d-flex flex-column b-bottom">
 						<div class="d-flex justify-content-between py-3"> <small class="text-muted">Resumo da Compra:</small>
 							<p>R$ <?= $itemToBuy['price'] ?></p>
