@@ -203,24 +203,13 @@
                   <?= $whoIsLogged['first_name'] ?>
                 </button>
                 <ul class="dropdown-menu">
-                  <li><a class="dropdown-item" href="#">Perfil</a></li>
-                  <li><a class="dropdown-item" href="#">Compras</a></li>
+                  <li><a class="dropdown-item" href="<?= base_url() ?>profile/">Perfil</a></li>
+                  <li><a class="dropdown-item" href="<?= base_url() ?>profile/orders/">Compras</a></li>
                   <li><a class="dropdown-item" href="<?= base_url() ?>login/logout">Log out</a></li>
                 </ul>
               </div>
               <button class="btn btn-warning" type="button">Carrinho</button>
             <?php endif ?>
-
-
-
-
-
-
-
-
-
-
-
 
           </form>
 
