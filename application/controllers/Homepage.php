@@ -33,7 +33,7 @@ class Homepage extends CI_Controller
 	{
 		$data['whoIsLogged'] = '';
 		$isLogged = isset($this->session->userdata['logged_user']);
-		
+
 
 		if ($isLogged) {
 			$data['whoIsLogged'] = $this->session->userdata['logged_user'];
@@ -46,21 +46,6 @@ class Homepage extends CI_Controller
 
 		$this->load->view('templates/header', $data);
 		$this->load->view('pages/homepage', $data);
-		$this->load->view('templates/footer-script', $data);
-		$this->load->view('templates/footer', $data);
-	}
-
-	public function edit($id)
-	{
-
-		adminPermission();
-		$data['whoIsLogged'] = $this->session->userdata['logged_user'];
-
-		$data['item'] = $this->items_model->editItem($id);
-		$data['title'] = $data['item']['item_name'] . ' Editing...';
-
-		$this->load->view('templates/header', $data);
-		$this->load->view('templates/form-edit-items', $data);
 		$this->load->view('templates/footer-script', $data);
 		$this->load->view('templates/footer', $data);
 	}
