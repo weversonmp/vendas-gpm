@@ -1,13 +1,23 @@
 <style>
-	dialog {}
+	#dialogEdit {
+		margin: auto;
+		max-width: 75%;
+		border-radius: 25px;
+	}
 
-	.dialog-edit-item-31::backdrop {
+	.dialog-edit-item::backdrop {
 		background-color: rgba(0, 0, 0, 0.8);
+	}
+
+	@media screen and (max-width: 450px) {
+		#dialogEdit {
+			max-width: 100%;
+		}
 	}
 </style>
 
 <main class="mt-5 container">
-	<div class="rad row bg-dark p-3 border border-dark shadow">
+	<div class="row bg-dark p-3 border border-dark shadow">
 		<?php if (!$items) : ?>
 			<div class="">
 				<h1 style="color: white;">A pesquisa não obteve resultados...</h1>
@@ -16,15 +26,15 @@
 
 		<?php foreach ($items as $item) : ?>
 
-			<div class="col-sm-4 col-xl-3 fade-in mb-3">
-				<div class="card" id="card-shape">
+			<div class="m-md-auto col-sm-5 col-lg-3 fade-in mb-3">
+				<div class="card mb-3" id="card-shape">
 					<div class="card-body">
 						<img src="<?= base_url() ?>img/shoes.jpg" alt="Imagem do Tênis" class="card-img">
 						<h3 id="h3a" class="card-title text-break text-truncate "><?= $item['item_name'] ?></h3>
-						<p class="card-text mb-2"><?= $item['brand'] ?></p>
-						<p class="card-text mb-2"><?= $item['model'] ?></p>
-						<p class="card-text mb-2"><?= $item['color'] ?></p>
-						<p class="card-text mb-2">R$ <?= $item['price'] ?></p>
+						<p class="card-text mb-2 text-truncate"><?= $item['brand'] ?></p>
+						<p class="card-text mb-2 text-truncate"><?= $item['model'] ?></p>
+						<p class="card-text mb-2 text-truncate"><?= $item['color'] ?></p>
+						<p class="card-text mb-2 text-truncate">R$ <?= $item['price'] ?></p>
 						<?php ?>
 
 						<?php if (!$whoIsLogged || $whoIsLogged['access_type'] == 'custumer') : ?>
@@ -35,10 +45,10 @@
 
 						<?php elseif ($whoIsLogged['access_type'] == 'admin') : ?>
 
-							<div class="mw-100 d-flex justify-content-around ">
-								<a name="edit" id="modal-edit-<?= $item['id'] ?>" class="btn btn-success w-25 xl" role="button" onclick="modalEditItem(<?= $item['id'] ?>)"><i class="fas fa-pencil-alt"></i></a>
-								<a name="enable-disable" id="" class="btn btn-warning w-25" href="#" role="button"><i class="fa-solid fa-lock"></i></a>
-								<a name="delete" id="" class="btn btn-danger w-25" href="<?= base_url() ?>homepage/deleteconfirm/<?= $item['id'] ?>" role="button"><i class="fas fa-trash"></i></a>
+							<div class="mw-100 d-flex justify-content-around gap-3">
+								<a name="edit" id="modal-edit-<?= $item['id'] ?>" class="btn btn-success m-auto col-md-4 " role="button" onclick="modalEditItem(<?= $item['id'] ?>)"><i class="fas fa-pencil-alt"></i></a>
+								<a name="enable-disable" id="" class="btn btn-warning m-auto col-md-4 " href="#" role="button"><i class="fa-solid fa-lock"></i></a>
+								<a name="delete" id="" class="btn btn-danger m-auto col-md-4 " href="<?= base_url() ?>homepage/deleteconfirm/<?= $item['id'] ?>" role="button"><i class="fas fa-trash"></i></a>
 							</div>
 
 						<?php endif ?>
@@ -46,11 +56,14 @@
 					</div>
 				</div>
 			</div>
+
 			<?php if ($whoIsLogged['access_type'] == 'admin') : ?>
-				<dialog class="container dialog-edit-item-<?= $item['id'] ?>">
-					<div class="d-flex align-items-center justify-content-center align-content-center">
+
+				<dialog id="dialogEdit" class="col-lg-6 dialog-edit-item dialog-edit-item-<?= $item['id'] ?>">
+					<div class="bodyForm d-flex flex-column p-3">
+
 						<!-- col-md-12 ml-sm-auto col-lg-12 px-4 -->
-						<form action="<?= base_url() ?>homepage/update" method="post" class="form d-flex flex-column">
+						<form action="<?= base_url() ?>homepage/update" method="post" class="">
 							<input type="hidden" class="d-none form-control" name="item_id" id="item_id" value="<?= $item['id'] ?>">
 							<div class="d-flex">
 								<div class="col-md-6 my-3 mx-1">

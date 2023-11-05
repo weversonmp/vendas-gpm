@@ -41,8 +41,8 @@
       border-bottom-left-radius: 25px;
       border-bottom-right-radius: 25px;
       background-color: #eee;
-      max-width: 60%;
-      margin-top: 70px;
+      max-width: 75%;
+      /* margin-top: 70px; */
     }
 
     .navbar-brand {
