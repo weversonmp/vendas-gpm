@@ -56,7 +56,7 @@
 </head>
 
 <body class="text-center">
-	<form class="p-5 form-signin" method="post" action="<?= base_url() ?>login/userlogin">
+	<form class="p-4 form-signin" method="post" action="<?= base_url() ?>login/userlogin">
 		<img style='border-radius: 50%;' class="mb-4 w-50" src="<?= base_url() ?>img/shoesbrand/3.jpeg">
 		<h1 class="h3 mb-3 font-weight-normal">BuyaShoes | Login</h1>
 		<input type="text" name="username" id="username" class="form-control mb-2" placeholder="Nome do usuário" required autofocus>
@@ -67,13 +67,13 @@
 			</label>
 		</div>
 		<button class="btn btn-lg btn-primary btn-block mb-3" type="submit">Log in</button>
-		<p>
+		<p class="mb-3">
 			<a class="icon-link icon-link-hover" href="<?= base_url() ?>login/signup">Não tem uma conta?</a>
 		</p>
 		<p>
 			<a href="<?= base_url() ?>">Veja nosso catálogo!</a>
 		</p>
-		<p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+		<p class="mt-3 text-muted">&copy; 2023</p>
 	</form>
 </body>
 

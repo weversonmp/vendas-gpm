@@ -25,6 +25,8 @@
 		#bg-effect {
 			display: block;
 			position: absolute;
+			left: 0px;
+			/* top: 5px; */
 			z-index: -1;
 			width: 100vw;
 			height: 100vh;
@@ -73,10 +75,10 @@
 
 <body>
 	<div id="bg-effect"></div>
-	<div class="container min-vh-100 d-flex justify-content-center text-center">
-		<form class="p-5 form-signin" method="post" action="<?= base_url() ?>login/newUser">
-			<img style='border-radius: 50%;' class="mb-4 w-50" src="<?= base_url() ?>img/shoesbrand/3.jpeg">
-			<h1 class="h3 mb-3 font-weight-normal text-nowrap">Cadastre-se</h1>
+	<div class="container-fluid d-flex justify-content-center text-center">
+		<form class="px-4 form-signin" method="post" action="<?= base_url() ?>login/newUser">
+			<img style='border-radius: 50%;' class="mb-2 col-4" src="<?= base_url() ?>img/shoesbrand/3.jpeg">
+			<h1 class="h3 mb-3 font-weight-normal text-nowrap">Novo Usuário</h1>
 			<input type="text" name="username" id="username" class="form-control mb-2" placeholder="Nome do usuário" required autofocus>
 			<input type="text" name="first_name" id="first_name" class="form-control mb-2" placeholder="Primeiro Nome" required autofocus>
 			<input type="text" name="last_name" id="last_name" class="form-control mb-2" placeholder="Segundo Nome" required autofocus>
@@ -93,7 +95,7 @@
 			<p>
 				<a href="<?= base_url() ?>login">Cancelar</a>
 			</p>
-			<p class="mt-5 mb-3 text-muted">&copy; 2023</p>
+			<p class="mt-2 mb-3 text-muted">&copy; 2023</p>
 		</form>
 	</div>
 

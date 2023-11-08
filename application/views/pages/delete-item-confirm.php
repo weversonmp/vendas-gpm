@@ -38,10 +38,10 @@
 
 <body class="bg-secondary ">
 	<div id="mirrorEffect"></div>
-	<div class="container min-vh-100 d-flex justify-content-center">
+	<div class="container-fluid min-vh-100 d-flex justify-content-center">
 		<form class="d-flex justify-content-center align-items-center">
-			<div class="card p-5 bg-dark d-flex flex-column justify-content-center align-items-center border-3 border-danger">
-				<div class="col-lg-8 fade-in">
+			<div class="card py-4 px-2 bg-dark d-flex flex-column justify-content-center align-items-center border-3 border-danger">
+				<div class="col-8 col-sm-4 fade-in">
 					<div class="card" id="card-shape">
 						<div class="card-body">
 							<img src="<?= base_url() ?>img/shoes.png" alt="Imagem do Tênis" class="card-img">
@@ -53,7 +53,7 @@
 						</div>
 					</div>
 				</div>
-				<h3 class="text-white">Deseja realmente deletar esse item?</h3>
+				<h3 class="text-white text-center mt-2">Deseja realmente deletar esse item?</h3>
 				<div class="mt-3 d-flex gap-3">
 					<a href="<?= base_url() ?>homepage/delete/<?= $itemID ?>" class="btn btn-success btn-lg deleteBTN" type="button">Sim</a>
 					<a href="<?= base_url() ?>" class="btn btn-danger btn-lg deleteBTN" type="button">Não</a>
