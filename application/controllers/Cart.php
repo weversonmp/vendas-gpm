@@ -44,6 +44,7 @@ class Cart extends CI_Controller
 
 		custumerPermission();
 
+		// $getTime = $_POST['user_id'];
 		$getTime = time();
 
 		$orderInfos = (object) [
