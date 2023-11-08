@@ -14,7 +14,6 @@
 			max-width: 100%;
 		}
 	}
-
 </style>
 
 <main class="mt-5 container">
@@ -27,7 +26,7 @@
 
 		<?php foreach ($items as $item) : ?>
 
-			<div class="m-md-auto col-sm-5 col-lg-3 fade-in mb-3">
+			<div class="m-sm-auto col-sm-5 col-lg-3 fade-in mb-3">
 				<div class="card mb-3" id="card-shape">
 					<div class="card-body">
 						<img src="<?= base_url() ?>img/shoes.jpg" alt="Imagem do Tênis" class="card-img">
@@ -41,7 +40,7 @@
 						<?php if (!$whoIsLogged || $whoIsLogged['access_type'] == 'custumer') : ?>
 
 							<div class="mw-100 d-flex justify-content-around ">
-								<a name="edit" id="" class="btn btn-success w-25 xl" href="<?= base_url() ?>cart/payment/<?= $item['id'] ?>" role="button"><i class="fa-solid fa-money-bill-1-wave"></i></a>
+								<a name="edit" id="" class="btn btn-success xl" href="<?= base_url() ?>cart/payment/<?= $item['id'] ?>" role="button"><i class="fa-solid fa-money-bill-1-wave"></i></a>
 							</div>
 
 						<?php elseif ($whoIsLogged['access_type'] == 'admin') : ?>

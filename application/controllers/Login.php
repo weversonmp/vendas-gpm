@@ -35,7 +35,7 @@ class Login extends CI_Controller
 		$this->load->view('pages/signup', $data);
 	}
 
-	public function userCreateAdmin()
+	public function adminCreateUser()
 	{
 		adminPermission();
 
@@ -64,7 +64,7 @@ class Login extends CI_Controller
 	{
 
 		adminPermission();
-		
+
 		$this->load->model('login_model');
 
 		$newUser['username'] = $_POST['username'];
