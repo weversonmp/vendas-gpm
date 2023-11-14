@@ -5,26 +5,27 @@ class Items_model extends CI_Model
 	public function index()
 	{
 
-		return $this->db->order_by('item_name','asc')->get("tb_items")->result_array();
+		return $this->db->order_by('item_name', 'asc')->get("tb_items")->result_array();
 	}
 
 	public function search($search)
 	{
 		if (!$search) {
-			return $this->db->order_by('item_name','asc')->get("tb_items")->result_array();
+			return $this->db->order_by('item_name', 'asc')->get("tb_items")->result_array();
 		}
 		$query = "SELECT * FROM tb_items i WHERE i.item_name LIKE '%{$search}%'";
 		$query .= " OR i.description LIKE '%{$search}%'";
 		$query .= " ORDER BY item_name ASC";
 
 		return $this->db->query($query)->result_array();
-
 	}
 
-	public function newItem($item)
+	public function newItem($newItem)
 	{
-
-		$this->db->insert('tb_items', $item);
+		if (!$this->db->insert('tb_items', $newItem)) {
+			return $res = 1;
+		}
+		return $res = 0;
 	}
 
 	public function editItem($id)

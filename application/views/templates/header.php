@@ -11,8 +11,16 @@
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title><?= $title ?></title>
+
 	<!-- Bootstrap CSS -->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+	<!-- Bootstrap JavaScript Libraries -->
+	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+	</script>
+
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.1/dist/js/bootstrap.min.js" integrity="sha384-7VPbUDkoPSGFnVtYi0QogXtr74QeVeeIs99Qfg5YCF+TidwNdjvaKZX19NZ/e6oz" crossorigin="anonymous">
+	</script>
 
 	<!-- Font Awesome -->
 	<script src="https://kit.fontawesome.com/2a33fe9a00.js" crossorigin="anonymous"></script>
@@ -43,7 +51,7 @@
 							<a class="" href="<?= base_url() ?>login/admincreateuser">
 								<h5>Adicionar Usuário</h5>
 							</a>
-							<a class="" href="#">
+							<a class="" href="<?= base_url() ?>vendas">
 								<h5>Vendas Realizadas</h5>
 							</a>
 							<a class="" href="#">
@@ -59,9 +67,9 @@
 
 						<?php elseif ($whoIsLogged['access_type'] == 'custumer') : ?>
 
-							<a class="" href="<?= base_url() ?>profile/">
+							<!-- <a class="" href="<?= base_url() ?>profile/">
 								<h5>Perfil</h5>
-							</a>
+							</a> -->
 							<a class="" href="<?= base_url() ?>profile/orders/">
 								<h5>Compras</h5>
 							</a>
@@ -121,12 +129,12 @@
 						</button>
 						<ul class="dropdown-menu">
 							<li><a class="dropdown-item" href="<?= base_url() ?>login/admincreateuser">Novo Usuário</a></li>
-							<li><a class="dropdown-item" href="#">Vendas Realizadas</a></li>
+							<li><a class="dropdown-item" href="<?= base_url() ?>profile/sales">Vendas Realizadas</a></li>
 							<li><a class="dropdown-item" href="#">Items Desativados</a></li>
 							<li><a class="dropdown-item" href="<?= base_url() ?>login/logout">Log out</a></li>
 						</ul>
 					</div>
-					<a href="<?= base_url() ?>newitem/itemForm/" class="btn btn-warning text-nowrap">
+					<a href="<?= base_url() ?>homepage/newitem" class="btn btn-warning text-nowrap">
 						<i class="fa-solid fa-plus"></i> Item
 					</a>
 
@@ -136,7 +144,7 @@
 							<?= $whoIsLogged['first_name'] ?>
 						</button>
 						<ul class="dropdown-menu">
-							<li><a class="dropdown-item" href="<?= base_url() ?>profile/">Perfil</a></li>
+							<!-- <li><a class="dropdown-item" href="<?= base_url() ?>profile/">Perfil</a></li> -->
 							<li><a class="dropdown-item" href="<?= base_url() ?>profile/orders/">Compras</a></li>
 							<li><a class="dropdown-item" href="<?= base_url() ?>login/logout">Log out</a></li>
 						</ul>

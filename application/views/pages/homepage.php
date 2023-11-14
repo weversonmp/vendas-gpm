@@ -5,6 +5,20 @@
 		border-radius: 25px;
 	}
 
+	#dialogEdit[open] {
+		animation: show 500ms ease normal;
+	}
+
+	@keyframes show {
+		from {
+			transform: translateY(-50%);
+		}
+
+		to {
+			transform: translateY(0%);
+		}
+	}
+
 	.dialog-edit-item::backdrop {
 		background-color: rgba(0, 0, 0, 0.8);
 	}
@@ -66,7 +80,6 @@
 							<!-- col-md-12 ml-sm-auto col-lg-12 px-4 -->
 							<form action="<?= base_url() ?>homepage/update" method="post" class="">
 								<input type="hidden" class="d-none form-control" name="item_id" id="item_id" value="<?= $item['id'] ?>">
-
 								<div class="d-flex">
 									<div class="col-md-6 my-2 mx-1">
 										<div class="form-group">
@@ -74,7 +87,7 @@
 											<input type="text" class="form-control" name="item_name" id="item_name" placeholder="Nome" value="<?= $item['item_name'] ?>" required>
 										</div>
 									</div>
-									<div class="col-md-6 my-2 mx-3 overflow-hidden">
+									<div class="col-md-6 my-2 mx-1 overflow-hidden">
 										<div class="form-group">
 											<strong><label for="brand">Marca </label></strong>
 											<input type="text" class="form-control" name="brand" id="brand" placeholder="Marca" value="<?= $item['brand'] ?>" required>
@@ -82,7 +95,7 @@
 									</div>
 								</div>
 
-								<div class="d-flex">
+								<div class="d-flex align-items-center">
 									<div class="col-md-6 my-2 mx-1">
 										<div class="form-group">
 											<strong><label for="model">Modelo </label></strong>
@@ -128,7 +141,7 @@
 								</div>
 								<div class="d-flex justify-content-center align-content-center align-items-center ">
 									<button type="submit" class="btn btn-success btn-xs m-1"><i class="fas fa-check"></i> Atualizar</button>
-									<a href="<?= base_url() ?>homepage" class="btn btn-danger btn-xs m-1"><i class="fas fa-times"></i> Cancelar</a>
+									<a class="btn btn-danger btn-xs m-1" onclick="closeModal(<?= $item['id'] ?>)"><i class="fas fa-times"></i> Cancelar</a>
 								</div>
 							</form>
 						</div>
@@ -144,5 +157,10 @@
 	const modalEditItem = (itemId) => {
 		const modalItem = document.querySelector(`.dialog-edit-item-${itemId}`)
 		modalItem.showModal()
+	}
+
+	const closeModal = (itemId) => {
+		const modalItem = document.querySelector(`.dialog-edit-item-${itemId}`)
+		modalItem.close()
 	}
 </script>

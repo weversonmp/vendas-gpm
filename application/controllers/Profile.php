@@ -39,4 +39,28 @@ class Profile extends CI_Controller
 		$this->load->view('templates/footer-script', $data);
 		$this->load->view('templates/footer', $data);
 	}
+
+	public function sales()
+	{
+		adminPermission();
+
+		$data['whoIsLogged'] = '';
+		$isLogged = isset($this->session->userdata['logged_user']);
+
+		if ($isLogged) {
+			$data['whoIsLogged'] = $this->session->userdata['logged_user'];
+		}
+
+		$this->load->model('profile_model');
+
+		$data['allOrders'] = $this->profile_model->getAllUsersOrders();
+
+
+		$data["title"] = 'Compras - BuyaShoes';
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/all-users-orders', $data);
+		$this->load->view('templates/footer-script', $data);
+		$this->load->view('templates/footer', $data);
+	}
 }

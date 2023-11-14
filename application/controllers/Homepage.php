@@ -70,7 +70,7 @@ class Homepage extends CI_Controller
 		redirect('homepage');
 	}
 
-	public function deleteconfirm($id)
+	public function deleteConfirm($id)
 	{
 		adminPermission();
 
@@ -90,5 +90,64 @@ class Homepage extends CI_Controller
 
 		$this->items_model->delete($id);
 		redirect('homepage');
+	}
+
+	public function newItem()
+	{
+		adminPermission();
+
+		$data['whoIsLogged'] = '';
+		$isLogged = isset($this->session->userdata['logged_user']);
+
+		if ($isLogged) {
+			$data['whoIsLogged'] = $this->session->userdata['logged_user'];
+		}
+
+		$data['items'] = $this->items_model->index();
+		$data['title'] = 'BuyaShoes';
+
+
+		$this->load->view('templates/header', $data);
+		$this->load->view('pages/new-item-form', $data);
+		$this->load->view('templates/footer-script', $data);
+		$this->load->view('templates/footer', $data);
+	}
+
+	public function insertNewItem()
+	{
+		adminPermission();
+
+		$data['whoIsLogged'] = '';
+		$isLogged = isset($this->session->userdata['logged_user']);
+
+		if ($isLogged) {
+			$data['whoIsLogged'] = $this->session->userdata['logged_user'];
+		}
+
+		$this->load->model('items_model');
+		$result = $this->items_model->newItem($_POST);
+
+		$data['title'] = 'BuyaShoes';
+
+		$this->load->view('templates/header', $data);
+
+		if (!$result) {
+
+?>
+			<div class="d-flex container-fluid alert alert-success mt-5 col-6 justify-content-center align-items-center">
+				<a class="btn btn-warning mx-3" href="<?= base_url() ?>"><i class="fa-solid fa-x"></i></a>
+				<div class="close" data-dismiss="alert" aria-label="close">Item adicionado com sucesso!</div>
+			</div>
+		<?php
+		} else { ?>
+			<div class="-flex container-fluid alert alert-success mt-5 col-6 justify-content-center align-items-center">
+				<a class="btn btn-warning mx-3" href="<?= base_url() ?>"><i class="fa-solid fa-x"></i></a>
+				<div class="close" data-dismiss="alert" aria-label="close">Falha ao adicionar o item</div>
+			</div>
+<?php
+
+			$this->load->view('templates/footer-script', $data);
+			$this->load->view('templates/footer', $data);
+		}
 	}
 }
