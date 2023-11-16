@@ -51,7 +51,7 @@
 							<a class="" href="<?= base_url() ?>login/admincreateuser">
 								<h5>Adicionar Usuário</h5>
 							</a>
-							<a class="" href="<?= base_url() ?>vendas">
+							<a class="" href="<?= base_url() ?>profile/sales">
 								<h5>Vendas Realizadas</h5>
 							</a>
 							<a class="" href="#">
