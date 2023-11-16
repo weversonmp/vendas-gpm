@@ -8,10 +8,6 @@ class Cart_model extends CI_Model
 		$itemInfos = $orderInfos->itemInfos;
 		$paymentInfos = $orderInfos->paymentInfos;
 
-		// print_r('<pre>');
-		// print_r($orderInfos);
-		// die();
-
 
 		$this->db->insert('tb_orders', $order);
 		$this->db->insert('tb_order_item', $itemInfos);

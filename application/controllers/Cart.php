@@ -51,7 +51,6 @@ class Cart extends CI_Controller
 			'order' => [
 				'id' => $getTime,
 				'total_price' => $_POST['total_price'] * $_POST['qtt'],
-				'order_state' => 'under_analysis',
 				'user_id' => $_POST['user_id']
 			],
 

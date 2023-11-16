@@ -7,15 +7,19 @@ class Login_model extends CI_Model
 		$this->db->where('username', $username);
 		$this->db->where('user_password', $password);
 
-		$res = $this->db->get("tb_users")->row_array();
-		$user['id'] = $res['id'];
-		$user['username'] = $res['username'];
-		$user['email'] = $res['email'];
-		$user['first_name'] = $res['first_name'];
-		$user['last_name'] = $res['last_name'];
-		$user['access_type'] = $res['access_type'];
+		if ($res = $this->db->get("tb_users")->row_array()) {
 
-		return $user;
+			$user['id'] = $res['id'];
+			$user['username'] = $res['username'];
+			$user['email'] = $res['email'];
+			$user['first_name'] = $res['first_name'];
+			$user['last_name'] = $res['last_name'];
+			$user['access_type'] = $res['access_type'];
+
+			return $user;
+		} else {
+			return false;
+		}
 	}
 
 	public function userSignup($newUser)

@@ -20,6 +20,61 @@ class Login extends CI_Controller
 		$this->load->view('pages/login', $data);
 	}
 
+	public function userLogin()
+	{
+		$this->load->model('login_model');
+		$data['title'] = 'Login...';
+
+		// print_r('<pre>');
+		// print_r($_SESSION);
+		// die();
+
+		$username = $_POST['username'];
+		$password = $_POST['password'];
+		$user = $this->login_model->userLogin($username, $password);
+
+
+		$data['whoIsLogged'] = '';
+		$isLogged = isset($this->session->userdata['logged_user']);
+
+		if ($isLogged) {
+			$data['whoIsLogged'] = $this->session->userdata['logged_user'];
+		}
+
+		if (isset($user['username'])) {
+			if ($user['username'] == $_POST['username']) {
+				$this->session->set_userdata("logged_user", $user);
+				redirect("homepage");
+			}
+		} else {
+			$this->load->view('templates/header', $data);
+?>
+			<div class="container-fluid col-6 mt-5 p-5">
+				<h3 class="alert alert-danger mt-5 text-center" role="alert">
+					<i class="fa-solid fa-triangle-exclamation"></i>
+					O usuário ou a senha está incorreta.
+				</h3>
+			</div>
+
+			<?php
+
+			$this->load->view('templates/footer-script', $data);
+			$this->load->view('templates/footer', $data);
+
+			?>
+			<script>
+				setTimeout(() => {
+					alert('Voltando para tela de login...')
+				}, "2000");
+				setTimeout(() => {
+					window.location.href = "<?= base_url() ?>login";
+				}, "2000");
+			</script>
+<?php
+
+		}
+	}
+
 	public function signup()
 	{
 		// print_r('<pre>');
@@ -33,15 +88,6 @@ class Login extends CI_Controller
 		$data["title"] = 'Login - BuyaShoes';
 
 		$this->load->view('pages/signup', $data);
-	}
-
-	public function adminCreateUser()
-	{
-		adminPermission();
-
-		$data["title"] = 'Login - BuyaShoes';
-
-		$this->load->view('pages/new-user-create', $data);
 	}
 
 	public function newCustumer()
@@ -60,6 +106,16 @@ class Login extends CI_Controller
 		redirect(base_url());
 	}
 
+	public function adminCreateUser()
+	{
+		adminPermission();
+
+		$data["title"] = 'Login - BuyaShoes';
+
+		$this->load->view('pages/new-user-create', $data);
+	}
+
+
 	public function newUser()
 	{
 
@@ -77,26 +133,6 @@ class Login extends CI_Controller
 		$this->login_model->userSignup($newUser);
 
 		redirect(base_url());
-	}
-
-	public function userLogin()
-	{
-		$this->load->model('login_model');
-
-		// print_r('<pre>');
-		// print_r($_SESSION);
-		// die();
-
-		$username = $_POST['username'];
-		$password = $_POST['password'];
-		$user = $this->login_model->userLogin($username, $password);
-
-		if ($user) {
-			$this->session->set_userdata("logged_user", $user);
-			redirect("homepage");
-		} else {
-			redirect("login/userLogin");
-		}
 	}
 
 	public function editLogin()
