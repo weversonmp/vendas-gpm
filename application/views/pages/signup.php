@@ -25,6 +25,8 @@
 		#bg-effect {
 			display: block;
 			position: absolute;
+			left: 0px;
+			/* top: 5px; */
 			z-index: -1;
 			width: 100vw;
 			height: 100vh;
@@ -69,8 +71,8 @@
 
 <body>
 	<div id="bg-effect"></div>
-	<div class="container min-vh-100 d-flex justify-content-center text-center">
-		<form class="p-5 form-signin" method="post" action="<?= base_url() ?>login/newcustumer">
+	<div class="container-fluid d-flex justify-content-center text-center">
+		<form class="px-4 form-signin" method="post" action="<?= base_url() ?>login/newcustumer">
 			<img style='border-radius: 50%;' class="mb-4 w-50" src="<?= base_url() ?>img/shoesbrand/3.jpeg">
 			<h1 class="h3 mb-3 font-weight-normal text-nowrap">Cadastre-se</h1>
 			<input type="text" name="username" id="username" class="form-control mb-2" placeholder="Nome do usuário" required autofocus>
