@@ -1,11 +1,25 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Tempo de geração: 01/11/2023 às 14:05
--- Tempo de geração: 08/11/2023 às 06:38
+-- Host: 127.0.0.1:3306
+-- Tempo de geração: 16/11/2023 às 16:55
 -- Versão do servidor: 10.4.16-MariaDB
--- Versão do PHP: 7.4.12
+-- Versão do PHP: 7.4.33
 
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Banco de dados: `buyashoes`
+--
 
 -- --------------------------------------------------------
 
@@ -13,15 +27,18 @@
 -- Estrutura para tabela `tb_address`
 --
 
-CREATE TABLE `tb_address` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tb_address`;
+CREATE TABLE IF NOT EXISTS `tb_address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `cep` int(8) NOT NULL,
   `add_street` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `add_number` int(11) NOT NULL,
   `add_city` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `add_state` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -29,8 +46,9 @@ CREATE TABLE `tb_address` (
 -- Estrutura para tabela `tb_items`
 --
 
-CREATE TABLE `tb_items` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tb_items`;
+CREATE TABLE IF NOT EXISTS `tb_items` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `item_name` varchar(255) NOT NULL,
   `description` text NOT NULL,
   `brand` varchar(30) NOT NULL,
@@ -38,8 +56,9 @@ CREATE TABLE `tb_items` (
   `item_size` int(2) NOT NULL,
   `color` varchar(30) NOT NULL,
   `price` float(7,2) NOT NULL,
-  `stock` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `stock` int(11) NOT NULL DEFAULT 0,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8mb4;
 
 --
 -- Despejando dados para a tabela `tb_items`
@@ -71,20 +90,15 @@ INSERT INTO `tb_items` (`id`, `item_name`, `description`, `brand`, `model`, `ite
 -- Estrutura para tabela `tb_orders`
 --
 
-CREATE TABLE `tb_orders` (
+DROP TABLE IF EXISTS `tb_orders`;
+CREATE TABLE IF NOT EXISTS `tb_orders` (
   `id` int(99) NOT NULL,
   `total_price` float(7,2) NOT NULL,
   `order_date` timestamp NOT NULL DEFAULT current_timestamp() COMMENT 'Data e hora da compra',
-  `order_state` enum('under_analysis','canceled','paid','under_shipping','shipped') COLLATE utf8mb4_unicode_ci NOT NULL,
-  `user_id` int(11) NOT NULL
+  `order_state` enum('Em análise','Cancelado','Pago','Em separação','Enviado') COLLATE utf8mb4_unicode_ci NOT NULL DEFAULT 'Em análise',
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Despejando dados para a tabela `tb_orders`
---
-
-INSERT INTO `tb_orders` (`id`, `total_price`, `order_date`, `order_state`, `user_id`) VALUES
-(1698822275, 1199.00, '2023-11-01 07:04:35', 'under_analysis', 4);
 
 -- --------------------------------------------------------
 
@@ -92,22 +106,17 @@ INSERT INTO `tb_orders` (`id`, `total_price`, `order_date`, `order_state`, `user
 -- Estrutura para tabela `tb_order_item`
 --
 
-CREATE TABLE `tb_order_item` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tb_order_item`;
+CREATE TABLE IF NOT EXISTS `tb_order_item` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(99) NOT NULL,
   `copy_item_id` int(11) NOT NULL,
   `copy_item_price` float(7,2) NOT NULL,
-  `quantity` int(11) NOT NULL DEFAULT 1
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Despejando dados para a tabela `tb_order_item`
---
-
-INSERT INTO `tb_order_item` (`id`, `order_id`, `copy_item_id`, `copy_item_price`, `quantity`) VALUES
-(7, 1698807743, 17, 699.99, 1),
-(8, 1698820249, 13, 2999.00, 3),
-(9, 1698822275, 28, 1199.00, 1);
+  `quantity` int(11) NOT NULL DEFAULT 1,
+  PRIMARY KEY (`id`),
+  KEY `order_id_index` (`id`),
+  KEY `order_id_fk` (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -115,22 +124,15 @@ INSERT INTO `tb_order_item` (`id`, `order_id`, `copy_item_id`, `copy_item_price`
 -- Estrutura para tabela `tb_order_payment_details`
 --
 
-CREATE TABLE `tb_order_payment_details` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tb_order_payment_details`;
+CREATE TABLE IF NOT EXISTS `tb_order_payment_details` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `order_id` int(11) NOT NULL,
   `copy_payment_type` enum('debit','credit') COLLATE utf8mb4_unicode_ci NOT NULL,
   `copy_card_name` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `copy_card_number` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Despejando dados para a tabela `tb_order_payment_details`
---
-
-INSERT INTO `tb_order_payment_details` (`id`, `order_id`, `copy_payment_type`, `copy_card_name`, `copy_card_number`) VALUES
-(6, 1698807743, 'credit', 'aaaaaaaaaaaa', '1111111111111111111'),
-(7, 1698820249, 'credit', 'ggggggggggg', '22222222222'),
-(8, 1698822275, 'credit', 'aaaaaaaaaaa', '1111111111111111');
+  `copy_card_number` varchar(45) COLLATE utf8mb4_unicode_ci NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -138,14 +140,17 @@ INSERT INTO `tb_order_payment_details` (`id`, `order_id`, `copy_payment_type`, `
 -- Estrutura para tabela `tb_payment_type`
 --
 
-CREATE TABLE `tb_payment_type` (
-  `id` int(11) NOT NULL,
+DROP TABLE IF EXISTS `tb_payment_type`;
+CREATE TABLE IF NOT EXISTS `tb_payment_type` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `payment_type` enum('debit, credit') COLLATE utf8mb4_unicode_ci NOT NULL,
   `card_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
   `card_number` int(16) NOT NULL,
   `ccv` int(3) NOT NULL,
   `expiration_date` date NOT NULL,
-  `user_id` int(11) NOT NULL
+  `user_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `user_id` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -153,88 +158,25 @@ CREATE TABLE `tb_payment_type` (
 --
 -- Estrutura para tabela `tb_users`
 --
--- Índices para tabelas despejadas
---
+
+DROP TABLE IF EXISTS `tb_users`;
+CREATE TABLE IF NOT EXISTS `tb_users` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `username` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `first_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `last_name` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `email` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `user_password` varchar(30) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `access_type` enum('custumer','admin') COLLATE utf8mb4_unicode_ci DEFAULT 'custumer',
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Índices de tabela `tb_address`
---
-ALTER TABLE `tb_address`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Índices de tabela `tb_items`
---
-ALTER TABLE `tb_items`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `tb_orders`
---
-ALTER TABLE `tb_orders`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `tb_order_item`
---
-ALTER TABLE `tb_order_item`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `tb_order_payment_details`
---
-ALTER TABLE `tb_order_payment_details`
-  ADD PRIMARY KEY (`id`);
-
---
--- Índices de tabela `tb_payment_type`
---
-ALTER TABLE `tb_payment_type`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `user_id` (`user_id`);
-
---
--- Índices de tabela `tb_users`
---
--- AUTO_INCREMENT para tabelas despejadas
+-- Despejando dados para a tabela `tb_users`
 --
 
---
--- AUTO_INCREMENT de tabela `tb_address`
---
-ALTER TABLE `tb_address`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT de tabela `tb_items`
---
-ALTER TABLE `tb_items`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
-
---
--- AUTO_INCREMENT de tabela `tb_order_item`
---
-ALTER TABLE `tb_order_item`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
-
---
--- AUTO_INCREMENT de tabela `tb_order_payment_details`
---
-ALTER TABLE `tb_order_payment_details`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
-
---
--- AUTO_INCREMENT de tabela `tb_payment_type`
---
-ALTER TABLE `tb_payment_type`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT de tabela `tb_users`
---
-ALTER TABLE `tb_users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+INSERT INTO `tb_users` (`id`, `username`, `first_name`, `last_name`, `email`, `user_password`, `access_type`) VALUES
+(1, 'admin', 'weverson', 'meneses', 'teste@teste.com', '123', 'admin');
 
 --
 -- Restrições para tabelas despejadas
@@ -247,10 +189,10 @@ ALTER TABLE `tb_address`
   ADD CONSTRAINT `tb_address_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_users` (`id`);
 
 --
--- Restrições para tabelas `tb_orders`
+-- Restrições para tabelas `tb_order_item`
 --
-ALTER TABLE `tb_orders`
-  ADD CONSTRAINT `tb_orders_ibfk_1` FOREIGN KEY (`user_id`) REFERENCES `tb_users` (`id`);
+ALTER TABLE `tb_order_item`
+  ADD CONSTRAINT `order_id_fk` FOREIGN KEY (`order_id`) REFERENCES `tb_orders` (`id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Restrições para tabelas `tb_payment_type`
@@ -260,3 +202,5 @@ ALTER TABLE `tb_payment_type`
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
